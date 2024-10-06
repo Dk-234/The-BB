@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Mentoring</title>
+    <link rel="stylesheet" href="{% static 'lms/style.css' %}">
+    
+    
+    <style>
+        body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full height of the viewport */
+    margin: 0; /* Remove default margin */
+}
+
+header, footer {
+    width: 100%; /* Make header and footer full width */
+    text-align: center; /* Center text */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content in the main section */
+    justify-content: center; /* Center vertically */
+}
+
+.button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 150px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Default hover effect when not running */
+        .button:hover {
+            background-color: #257728;
+        }
+
+        /* When the timer is running, the button turns red on hover */
+        .button.running:hover {
+            background-color: #981d1d;
+        }
+
+        /* Below the button to display the stopped time */
+        .time-display {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mentoring Session</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'mentor_dashboard' %}">Back to Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+        
+    <main>
+        <h2>Start your mentoring session here!</h2>
+        
+       <div class="mentoring-session">
+            <h1>Mentoring Session</h1>
+           {% if host_room_url %}
+            <iframe src="{{ host_room_url }}" width="1080px" height="700px" allow="camera; microphone; fullscreen"></iframe>
+           {% else %}
+            <p>error in starting a meeting.</p>
+           {% endif %}
+       </div>
+    
+    <!-- Start/Stop Timer Button -->
+    <button class="button" id="timerButton" onclick="startOrStopTimer()">Start Timer</button>
+
+    <!-- Display the time after stopping the timer -->
+    <div id="timeDisplay" class="time-display"></div>
+
+    </main>
+    
+    <!-- Timer Script -->
+    <script>
+        let timer;
+        let minutes = 0;
+        let seconds = 0;
+        let isRunning = false;
+
+        function startOrStopTimer() {
+            const timerButton = document.getElementById("timerButton");
+
+            if (!isRunning) {
+                isRunning = true;
+                timerButton.classList.add("running");
+                startTimer();
+            } else {
+                stopTimer();
+                timerButton.classList.remove("running");
+            }
+        }
+
+        function startTimer() {
+            const timerButton = document.getElementById("timerButton");
+            timerButton.textContent = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+            timer = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            seconds++;
+            if (seconds === 60) {
+                minutes++;
+                seconds = 0;
+            }
+
+            // Update the button text with the current time
+            const timerButton = document.getElementById("timerButton");
+            timerButton.textContent = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+            isRunning = false;
+
+            // Reset the button text
+            const timerButton = document.getElementById("timerButton");
+            timerButton.textContent = "Start Timer";
+
+            // Display the stopped time below the button
+            const timeDisplay = document.getElementById("timeDisplay");
+            timeDisplay.textContent = "Total Time consumed: " + minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2024 The BackBenchers</p>
+    </footer>
+    
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Learning</title>
+    
+     <style>
+        .time-display {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+            <h1>Learner Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'role_selection' %}">Role Selection</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                </ul>
+            </nav>
+        </header>
+    
+    <main>
+        <h1>Welcome, Learner! Your meeting room is ready.</h1>
+        
+    <div class="learning-session">
+    <h1>Learning Session</h1>
+    <iframe src="{{ room_url }}" width="1440px" height="900px" allow="camera; microphone; fullscreen"></iframe>
+    </div>
+        <div id="timerDisplay" class="time-display">00:00</div>
+    </main>
+    <script>
+        function updateTimer() {
+            fetch('/get_timer/')  // This will call get_timer() in views.py
+                .then(response => response.json())
+                .then(data => {
+                    const minutes = data.minutes.toString().padStart(2, '0');
+                    const seconds = data.seconds.toString().padStart(2, '0');
+                    document.getElementById("timerDisplay").textContent = minutes + ":" + seconds;
+                });
+        }
+
+        // Poll every 1 second to update the timer
+        setInterval(updateTimer, 1000);
+    </script>
+
+
+    <footer>
+        <p>&copy; 2024 The BackBenchers</p>
+    </footer>
+</body>
+</html>

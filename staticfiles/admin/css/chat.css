@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.chat-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.message.student {
+    text-align: right;
+}
+
+.message.mentor {
+    text-align: left;
+}
+
+.timestamp {
+    font-size: 0.8em;
+    color: #888;
+}
+
+form {
+    margin-top: 10px;
+}

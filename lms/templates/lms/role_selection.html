@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Selection</title>
+    <style>
+        /* General styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .role-selection-container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .role-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .pill-button {
+            background-color: #4CAF50; /* Green color */
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: none;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .pill-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .pill-button:active {
+            background-color: #3e8e41;
+        }
+
+        .pill-button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="role-selection-container">
+        <h1>Select Your Role</h1>
+        <div class="role-buttons">
+            <a href="{% url 'mentor_dashboard' %}" class="pill-button">Mentor</a>
+            <a href="{% url 'learner_dashboard' %}" class="pill-button">Learner</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mentor Dashboard</title>
+    <link rel="stylesheet" href="{% static 'lms/style.css' %}">
+    
+    <style>
+        .mentoring-btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 12px; /* Make it pill-shaped */
+}
+
+.mentoring-btn:hover {
+    background-color: #45a049; /* Darker green when hovered */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mentor Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'role_selection' %}">Role Selection</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Welcome, {{ user.username }}</h2>
+        <p>This is your mentor dashboard.</p>
+        <p>From here, you can manage your mentorship activities.</p>
+        
+        <button onclick="window.location.href='{% url 'start_mentoring' %}'" class="mentoring-btn">
+            Start Mentoring
+        </button>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 The BackBenchers</p>
+    </footer>
+</body>
+</html>

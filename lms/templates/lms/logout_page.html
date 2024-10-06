@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'lms/base.html' %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<h1>Help others to help yourself.</h1>
+<h2>Thankyou for visiting.</h2>
+<p>You will be redirected to the Home page in 5 seconds.</p>
+<script type="text/javascript">
+    setTimeout(function(){
+        window.location.href = "{% url 'home' %}";
+    }, 6000);  // 5000 milliseconds = 5 seconds
+</script>
+{% endblock %}
+</body>
+</html>
